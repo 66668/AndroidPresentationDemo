@@ -49,7 +49,7 @@
                        Toast.makeText(MainActivity.this, "不支持分屏", Toast.LENGTH_SHORT).show();
                    }
                    
-### 方式3：获取所有的display,包括主屏幕displayManager.getDisplays()
+### 方式3：获取所有的display,包括主屏幕，displayManager.getDisplays()
  
     displayManager = (DisplayManager)getSystemService(Context.DISPLAY_SERVICE);
                  Display[] presentationDisplays = displayManager.getDisplays();

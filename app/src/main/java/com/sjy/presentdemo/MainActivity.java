@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_type3:
-                displayManager = (DisplayManager)getSystemService(Context.DISPLAY_SERVICE);
+                displayManager = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
                 Display[] presentationDisplays = displayManager.getDisplays();
                 if (presentationDisplays.length > 1) {
-                    presentation2 = new MyPresentation2(this, presentationDisplays[1]);
+                    presentation2 = new MyPresentation2(getApplicationContext(), presentationDisplays[1]);
                     presentation2.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);//TYPE_SYSTEM_ALERT / TYPE_PHONE
                     presentation2.show();
                 } else {
@@ -108,9 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param display
      */
     private void showPresentation(Display display) {
-        if (myPresentation1 == null) {
-            myPresentation1 = new MyPresentation(this, display);
-        }
+        myPresentation1 = null;
+        myPresentation1 = new MyPresentation(getApplicationContext(), display);
 
         myPresentation1.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);//TYPE_SYSTEM_ALERT / TYPE_PHONE
         myPresentation1.show();
