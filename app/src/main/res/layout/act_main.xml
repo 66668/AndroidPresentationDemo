@@ -19,6 +19,8 @@
         android:id="@+id/btn_type1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="方式1：MediaRouter"
         android:textAllCaps="false" />
 
@@ -26,7 +28,9 @@
         android:id="@+id/btn_type2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
         android:text="方式2:可支持的Display[]数组"
         android:textAllCaps="false" />
 
@@ -34,16 +38,20 @@
         android:id="@+id/btn_type3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
         android:text="方式3:所有Display[]数组"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/btn4"
+        android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:text="@string/cancel" />
+        android:layout_marginEnd="20dp"
+        android:text="重置" />
 
 
 </LinearLayout>

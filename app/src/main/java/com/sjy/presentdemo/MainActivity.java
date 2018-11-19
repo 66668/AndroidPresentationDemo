@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.display.DisplayManager;
 import android.media.MediaRouter;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -19,11 +20,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private MyPresentation myPresentation;
+    private MyPresentation myPresentation1;
+    private MyPresentation2 presentation2;
     private Display display;
     private MediaRouter mediaRouter;//方式1
     private DisplayManager displayManager;//方式2
-    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +32,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.act_main);
         checkPermission();
 
-        findViewById(R.id.btn1).setOnClickListener(this);
-        findViewById(R.id.btn2).setOnClickListener(this);
-        findViewById(R.id.btn3).setOnClickListener(this);
-        findViewById(R.id.btn4).setOnClickListener(this);
+        findViewById(R.id.btn_type1).setOnClickListener(this);
+        findViewById(R.id.btn_type2).setOnClickListener(this);
+        findViewById(R.id.btn_type3).setOnClickListener(this);
+        findViewById(R.id.btn_back).setOnClickListener(this);
     }
 
-    //这种写法仍有问题，如果拒绝权限进行如下操作，会有问题，可以大胆测试下
+    //TODO 这种写法仍有问题，如果拒绝权限进行如下操作，会有bug
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //SYSTEM_ALERT_WINDOW权限申请
             if (!Settings.canDrawOverlays(this)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                intent.setData(Uri.parse("package:" + getPackageName()));//不加会显示所有可能的app
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityForResult(intent, 1);
             } else {
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn1:
+            case R.id.btn_type1:
                 mediaRouter = (MediaRouter) getSystemService(Context.MEDIA_ROUTER_SERVICE);
                 MediaRouter.RouteInfo localRouteInfo = mediaRouter.getSelectedRoute(MediaRouter.ROUTE_TYPE_LIVE_AUDIO);
                 display = localRouteInfo != null ? localRouteInfo.getPresentationDisplay() : null;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 break;
-            case R.id.btn2:
+            case R.id.btn_type2:
                 displayManager = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
                 Display[] arrayOfDisplay = displayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION);
                 if (arrayOfDisplay.length > 0) {
@@ -75,33 +77,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 break;
-            case R.id.btn3:
-                displayManager = (DisplayManager) this.getSystemService(Context.DISPLAY_SERVICE);
+            case R.id.btn_type3:
+                displayManager = (DisplayManager)getSystemService(Context.DISPLAY_SERVICE);
                 Display[] presentationDisplays = displayManager.getDisplays();
                 if (presentationDisplays.length > 1) {
-                    MyPresentation2 presentation = new MyPresentation2(this, presentationDisplays[1]);
-                    presentation.show();
+                    presentation2 = new MyPresentation2(this, presentationDisplays[1]);
+                    presentation2.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);//TYPE_SYSTEM_ALERT / TYPE_PHONE
+                    presentation2.show();
                 } else {
                     Toast.makeText(MainActivity.this, "不支持分屏", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.btn4:
-                if (myPresentation != null) {
-                    myPresentation.dismiss();
-                    myPresentation = null;
+            case R.id.btn_back:
+                if (myPresentation1 != null) {
+                    myPresentation1.dismiss();
+                    myPresentation1 = null;
                 }
+                if (presentation2 != null) {
+                    presentation2.dismiss();
+                    presentation2 = null;
+                }
+
                 break;
         }
     }
 
-
+    /**
+     * 主屏back键/home键隐藏后，副屏仍可使用。但是，再次打开主屏，副屏会失联，所以作如下设置
+     *
+     * @param display
+     */
     private void showPresentation(Display display) {
-        if (myPresentation == null) {
-            myPresentation = new MyPresentation(this, display);
+        if (myPresentation1 == null) {
+            myPresentation1 = new MyPresentation(this, display);
         }
 
-        myPresentation.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);//TYPE_SYSTEM_ALERT / TYPE_PHONE
-        myPresentation.show();
+        myPresentation1.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);//TYPE_SYSTEM_ALERT / TYPE_PHONE
+        myPresentation1.show();
     }
 
 }

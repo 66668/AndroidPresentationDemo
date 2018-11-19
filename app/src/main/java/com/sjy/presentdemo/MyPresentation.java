@@ -14,6 +14,7 @@ import android.widget.TextView;
  */
 public class MyPresentation extends Presentation {
     Context context;
+    TextView textView;
 
     public MyPresentation(Context outerContext, Display display) {
         super(outerContext, display);
@@ -25,7 +26,7 @@ public class MyPresentation extends Presentation {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ly_display1);
 
-        TextView textView = (TextView) findViewById(R.id.text);
+        textView = (TextView) findViewById(R.id.text);
         textView.setText("副屏如果支持触摸，可以点击试试结果");
         findViewById(R.id.click).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +38,8 @@ public class MyPresentation extends Presentation {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-//                                    dismiss();
+                                textView.setText("哎呦，不错哦");
+//                                dismiss();
 
                             }
                         }).create().show();
