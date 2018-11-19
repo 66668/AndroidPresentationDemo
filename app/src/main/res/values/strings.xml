@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">secondTouch</string>
+
+    <string name="show_mr">主副屏异显方法1</string>
+    <string name="show_dm">主副屏异显方法2</string>
+    <string name="change">改变副屏颜色</string>
+    <string name="cancel">回到起始状态</string>
+    <string name="presentation">当前是副屏页面</string>
+    <string name="display">RK双屏异显功能</string>
+    <string name="touch">RK双触功能</string>
+
+    <string name="first">这是你第一次操作我，我是副屏，我是由另一个触摸屏操控的</string>
+    <string name="second">是不是傻，点了还点，我是副屏，我是由另一个触摸屏操控的</string>
+    <string name="third">你跟我干上了是吧，好吧。我是副屏，我是由另一个触摸屏操控的</string>
+    <string name="forth">算了，不跟你计较，我记忆清空。我是副屏，我是由另一个触摸屏操控的</string>
+</resources>
