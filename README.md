@@ -27,7 +27,7 @@
 
  ### 2.三种方式获取Display类:
  
-  ####方式1：MediaRouter
+####方式1：MediaRouter
   
     mediaRouter = (MediaRouter) getSystemService(Context.MEDIA_ROUTER_SERVICE);
                   MediaRouter.RouteInfo localRouteInfo = mediaRouter.getSelectedRoute(MediaRouter.ROUTE_TYPE_LIVE_AUDIO);
@@ -39,7 +39,7 @@
                   }
 
   
-   ####方式2：获取可支持的displahy,displayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION)
+####方式2：获取可支持的displahy,displayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION)
    
         displayManager = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
                    Display[] arrayOfDisplay = displayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION);
@@ -49,7 +49,7 @@
                        Toast.makeText(MainActivity.this, "不支持分屏", Toast.LENGTH_SHORT).show();
                    }
                    
- ####方式3：获取所有的display,包括主屏幕displayManager.getDisplays()
+####方式3：获取所有的display,包括主屏幕displayManager.getDisplays()
  
     displayManager = (DisplayManager)getSystemService(Context.DISPLAY_SERVICE);
                  Display[] presentationDisplays = displayManager.getDisplays();
