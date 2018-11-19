@@ -1,10 +1,12 @@
-# 双屏异显学习
-## 申请权限:SYSTEM_ALERT_WINDOW
+# 双屏异显使用教程
+为开发酒店柜台刷身份证+识别VIP用户而定制的双屏异显设备。测试时请用双屏设备测试。
+##使用具体步骤
+### 1.申请权限:SYSTEM_ALERT_WINDOW
 需要在AndroidManifest.xml中添加权限：
 
     <uses-permission  android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     
-说明：SYSTEM_ALERT_WINDOW权限申请和危险权限申请步骤不同，而且不需要startActivityForResult/onActivityResult的回调：
+说明：SYSTEM_ALERT_WINDOW权限申请和危险权限申请步骤不同，而且不需要startActivityForResult/onActivityResult的回调:
 
             //大于android 6.0才可以申请权限
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && this.getApplicationInfo().targetSdkVersion >= Build.VERSION_CODES.M) {
@@ -20,3 +22,8 @@
                     //TODO do something you need
                 }
             }
+
+ ### 2.三种方式获取Display类
+   
+ 
+ ##           
