@@ -6,7 +6,9 @@
 ## 1.申请权限:SYSTEM_ALERT_WINDOW
 需要在AndroidManifest.xml中添加权限：
 
+    <--! 危险权限-->
     <uses-permission  android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
     
 说明：SYSTEM_ALERT_WINDOW权限申请和危险权限申请步骤不同，而且不需要startActivityForResult/onActivityResult的回调:
 
